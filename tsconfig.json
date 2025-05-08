@@ -11,7 +11,12 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-        "@libs/*": ["libs/*"],
+      "@libs/*": [
+        "libs/*"
+      ],
+      "@src/*": [
+        "src/*"
+      ]
     },
     "incremental": true,
     "skipLibCheck": true,
@@ -21,8 +26,8 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
   },
-    "include": [
-        "src/**/*",
-        "libs/**/*"
-    ],
+  "include": [
+    "src/**/*",
+    "libs/**/*",
+  ],
 }

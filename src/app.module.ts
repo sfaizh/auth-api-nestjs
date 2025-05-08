@@ -1,13 +1,16 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
+import { AppController } from './app.controller'
+import { AppService } from './app.service'
 import { UserModule } from './user/user.module'
-import { LoggerMiddleware } from '@libs/logger/logger.middleware';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
+import { LoggerMiddleware } from '@libs/logger/logger.middleware'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { DataSource } from 'typeorm'
+import { APP_GUARD } from '@nestjs/core'
+import { RolesGuard } from './auth/roles.guard'
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-    imports: [UserModule,
+    imports: [UserModule, AuthModule,
         // TypeOrmModule.forRoot({
         //     type: 'mysql',
         //     host: 'localhost',
@@ -20,7 +23,12 @@ import { DataSource } from 'typeorm';
         // }),
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [AppService,
+        {
+            provide: APP_GUARD,
+            useClass: RolesGuard,
+        },
+    ],
 })
 export class AppModule implements NestModule {
     // constructor(private dataSource: DataSource) {}
