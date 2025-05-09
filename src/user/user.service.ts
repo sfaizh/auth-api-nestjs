@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { User } from './interfaces/user.interface'
-import { Role } from '@src/auth/decorators/role.enum';
+import { Role } from '@src/auth/decorators/role.enum'
 
 @Injectable()
 export class UserService {
@@ -21,10 +21,11 @@ export class UserService {
       email: 'mstein@example.com',
       roles: [Role.Admin]
     },
-  ];
+  ]
 
   create(user: User) {
     this.users.push(user)
+    return user
   }
 
   findAll(): User[] {

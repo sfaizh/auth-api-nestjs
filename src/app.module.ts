@@ -27,12 +27,7 @@ import { ConfigModule } from '@nestjs/config'
         // }),
     ],
     controllers: [AppController],
-    providers: [AppService,
-        {
-            provide: APP_GUARD,
-            useClass: RolesGuard,
-        },
-    ],
+    providers: [AppService]
 })
 export class AppModule implements NestModule {
     // constructor(private dataSource: DataSource) {}

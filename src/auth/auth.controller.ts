@@ -15,7 +15,7 @@ export class AuthController {
     // Can auth routes now
     @UseGuards(AuthGuard)
     @Get('current')
-    getProfile(@Request() req) {
+    getCurrentUser(@Request() req) {
         return req.user
     }
 }
