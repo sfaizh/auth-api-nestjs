@@ -7,10 +7,14 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { DataSource } from 'typeorm'
 import { APP_GUARD } from '@nestjs/core'
 import { RolesGuard } from './auth/roles.guard'
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth/auth.module'
+import { ConfigModule } from '@nestjs/config'
 
 @Module({
     imports: [UserModule, AuthModule,
+        ConfigModule.forRoot({
+            isGlobal: true
+        })
         // TypeOrmModule.forRoot({
         //     type: 'mysql',
         //     host: 'localhost',

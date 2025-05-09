@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { User } from './interfaces/user.interface'
+import { Role } from '@src/auth/decorators/role.enum';
 
 @Injectable()
 export class UserService {
@@ -10,7 +11,7 @@ export class UserService {
       password: 'changeme',
       name: 'john',
       email: 'jdoe@example.com',
-      roles: ['user']
+      roles: [Role.User]
     },
     {
       userId: 2,
@@ -18,7 +19,7 @@ export class UserService {
       password: 'guess',
       name: 'marie',
       email: 'mstein@example.com',
-      roles: ['admin']
+      roles: [Role.Admin]
     },
   ];
 
@@ -33,7 +34,14 @@ export class UserService {
   findOne(username: string): User {
     const user = this.users.find(user => user.username === username)
     if (!user) {
-      throw new Error(`User with name ${name} not found`)
+      throw new Error(`User not found`)
+    }
+    return user
+  }
+  findOneId(userId: number): User {
+    const user = this.users.find(user => user.userId === userId)
+    if (!user) {
+      throw new Error(`User not found`)
     }
     return user
   }

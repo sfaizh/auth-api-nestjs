@@ -1,5 +1,6 @@
-import { Body, Post, HttpCode, HttpStatus, Controller } from '@nestjs/common';
-import { AuthService } from '@src/auth/auth.service';
+import { Body, Get, Post, HttpCode, HttpStatus, Controller, UseGuards, Request } from '@nestjs/common'
+import { AuthGuard } from '@src/auth/auth.guard'
+import { AuthService } from '@src/auth/auth.service'
 
 @Controller('auth')
 export class AuthController {
@@ -9,5 +10,12 @@ export class AuthController {
     @Post('login')
     signIn(@Body() signInDto: Record<string, any>) { // TODO validation here using Dto class
         return this.authService.signIn(signInDto.username, signInDto.password)
+    }
+
+    // Can auth routes now
+    @UseGuards(AuthGuard)
+    @Get('current')
+    getProfile(@Request() req) {
+        return req.user
     }
 }
