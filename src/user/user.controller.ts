@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, Query, ParseIntPipe, UseGuards } from '@nestjs/common'
 import { UserService } from './user.service'
-import { CreateUserDto, UpdateUserDto, ListAllEntities } from './dto'
+import { CreateUserDto, UpdateUserDto } from './dto'
 import { User } from './interfaces/user.interface'
 import { Roles } from '@src/auth/decorators/roles.decorator'
 import { AuthGuard } from '@src/auth/auth.guard'
@@ -15,7 +15,7 @@ export class UserController {
   @UseGuards(AuthGuard, RolesGuard) // AuthGuard attaches req object for use
   @Post('new')
   @Roles(Role.Admin)
-  async create(@Body() createUserDto: CreateUserDto) {
+  async create(@Body() createUserDto: CreateUserDto): Promise<{hash}> {
     const saltOrRounds = 10
     const hashedPassword = await bcrypt.hash(createUserDto.password, saltOrRounds)
     const userToSave = {
@@ -24,30 +24,31 @@ export class UserController {
       password: hashedPassword
     }
 
-    const newUser = await this.userService.create(userToSave)
-    const { password, ...cleanedUser } = newUser
-
-    return cleanedUser
+    await this.userService.create(userToSave)
+    return {
+      hash: hashedPassword.slice(0, 10)
+    }
   }
 
   @UseGuards(AuthGuard, RolesGuard)
   @Get()
-  findAll(): User[] {
+  async findAll(): Promise<User[]> {
     return this.userService.findAll()
   }
 
   @Get(':id')
-  findOne(@Param('id') name: string) {
+  async findOne(@Param('id') name: string) {
     return this.userService.findOne(name)
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return id
+  update(@Param('id') userId: number, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.update(userId, updateUserDto)
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return id
+  async remove(@Param('id', ParseIntPipe) userId: number) {
+    await this.userService.remove(userId)
+    return { message: 'User deleted' }
   }
 }

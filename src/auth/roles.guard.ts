@@ -31,7 +31,6 @@ export class RolesGuard implements CanActivate {
         if (!hasRole) {
             throw new ForbiddenException('You do not have permission to access this resource')
         }
-        console.log('RolesGuard → req.user:', user);
         return hasRole
     }
 }

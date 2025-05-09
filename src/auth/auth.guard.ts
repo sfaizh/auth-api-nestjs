@@ -30,8 +30,6 @@ export class AuthGuard implements CanActivate {
                 }
             )
             req['user'] = payload
-
-            console.log('AuthGuard → req.user set to:', payload);
         } catch {
             throw new UnauthorizedException
         }

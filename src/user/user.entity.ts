@@ -1,16 +1,26 @@
+import { Role } from '@src/auth/decorators/role.enum';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number
+  userId: number
 
   @Column()
-  firstName: string
+  username: string
 
   @Column()
-  lastName: string
+  password: string
 
-  @Column({ default: true })
-  isActive: boolean
+  @Column()
+  name: string
+
+  @Column()
+  email: string
+
+  @Column({ nullable: true })
+  refreshToken: string
+
+  @Column('simple-array')
+  roles: Role[]
 }
