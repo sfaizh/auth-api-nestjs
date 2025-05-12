@@ -50,11 +50,14 @@ touch .env
 
 ## User Management
 
-- **GET** `/users/me`  
-  Retrieves the authenticated user's profile.
+- **GET** `/user`  
+  Retrieves all users.
 
-- **PUT** `/users/me`  
-  Updates the authenticated user's profile.
+- **GET** `/user:id`  
+  Retrieves user by id
 
-- **DELETE** `/users/me`  
-  Deletes the authenticated user's account.
+- **PUT** `/user:id`  
+  Updates a user
+
+- **DELETE** `/user:id`  
+  Deletes a user
