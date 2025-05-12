@@ -30,3 +30,31 @@ npm install
 # setup environment variables
 touch .env
 # edit .env with DB credentials and JWT secrets
+```
+
+# Endpoints
+
+## Authentication
+
+- **POST** `/auth/register`  
+  Registers a new user.
+
+- **POST** `/auth/login`  
+  Authenticates a user and returns access and refresh tokens.
+
+- **POST** `/auth/refresh`  
+  Provides a new access token using a valid refresh token.
+
+- **POST** `/auth/logout`  
+  Logs out the user and invalidates the refresh token.
+
+## User Management
+
+- **GET** `/users/me`  
+  Retrieves the authenticated user's profile.
+
+- **PUT** `/users/me`  
+  Updates the authenticated user's profile.
+
+- **DELETE** `/users/me`  
+  Deletes the authenticated user's account.
