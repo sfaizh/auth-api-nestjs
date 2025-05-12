@@ -1,6 +1,6 @@
 # Backend API for user authentication
 
-This is the backend API service for my ev-solar app, built with **NestJS** and **TypeScript**. It provides core user management features including authentication, authorization, and basic CRUD operations.
+This is the backend API service for my ev-solar app, built with **NestJS** and **TypeScript**. It serves as a simple example of user authentication, authorization (roles) and basic CRUD operations to a MySQL database.
 
 ## Features
 
