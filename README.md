@@ -21,8 +21,8 @@ This is the backend API service for my ev-solar app, built with **NestJS** and *
 
 ```bash
 # clone the repo
-git clone https://github.com/your-username/ev-solar-backend.git
-cd ev-solar-backend
+git clone https://github.com/sfaizh/auth-api-nestjs.git
+cd auth-api-nestjs
 
 # install dependencies
 npm install
