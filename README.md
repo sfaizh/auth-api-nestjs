@@ -13,7 +13,6 @@ This is the backend API service for my ev-solar app, built with **NestJS** and *
 ## Stack
 
 - [NestJS](https://nestjs.com/) – Node.js framework
-- TypeScript – static typing
 - JWT – authentication *(configure in `.env`)*
 - MySQL via TypeORM *(configure in `.env`)*
 
